@@ -235,12 +235,15 @@ class Game:
             else :
                 team[agent.team] += 1
         
-        if not team[0]:
-            print "Winner is blue in: " + str(self.time)
-            self.winner = 0
-        if not team[1]:
-            print "Winner is red in: " + str(self.time)
-            self.winner = 1
+        for (idx, val) in enumerate(team):
+            if val == 0:
+                self.minds[idx] = None
+        # reduce to [None, <players left>]
+        _s = set(self.minds)
+        if len(set(self.minds)) <= 2:
+            print "Winner is", list(_s)[1], "in " + str(self.time)
+            self.winner = True        
+
         if self.max_time > 0 and self.time > self.max_time:
             print "It's a draw!"
             self.winner = -1
