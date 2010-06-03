@@ -240,9 +240,10 @@ class Game:
                 self.minds[idx] = None
         # reduce to [None, <players left>]
         _s = set(self.minds)
-        if len(set(self.minds)) <= 2:
-            print "Winner is", list(_s)[1], "in " + str(self.time)
-            self.winner = True        
+        if list(_s)[0] == None and len(_s) <= 2:
+            winner = list(_s)[1]
+            print "Winner is", winner, "in " + str(self.time)
+            self.winner = self.minds.index(winner)
 
         if self.max_time > 0 and self.time > self.max_time:
             print "It's a draw!"
